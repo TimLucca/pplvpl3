@@ -140,9 +140,10 @@ public class Project3
       {
         case callCode: //not done
           numPassed = 0;
+          break;
 
         case passCode:
-          a = mem[++ip];
+          a = mem[++ip] + 2 + bp;
           mem[sp + 2 + numPassed++] = mem[a];
           ip++;
           break;
@@ -172,8 +173,157 @@ public class Project3
           break;
         
         case condJumpCode:
+          a = mem[ip + 2] + 2 + bp;
+          if(mem[a] != 0)
+            ip = mem[ip + 1];
+          else
+            ip += 2;
+          break;
           
-        
+        case addCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          mem[a] = mem[b] + mem[c];
+          ip++;
+          break;
+
+        case multCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          mem[a] = mem[b] * mem[c];
+          ip++;
+          break;
+
+        case divCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          mem[a] = mem[b] / mem[c];
+          ip++;
+          break;
+
+
+        case remCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          mem[a] = mem[b] % mem[c];
+          ip++;
+          break;
+
+        case equalCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          if(mem[b] == mem[c])
+            mem[a] = 1;
+          else
+            mem[a] = 0;
+          ip++;
+          break;
+
+
+        case notEqualCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          if(mem[b] != mem[c])
+            mem[a] = 1;
+          else
+            mem[a] = 0;
+          ip++;
+          break;
+
+
+        case lessCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          if(mem[b] < mem[c])
+            mem[a] = 1;
+          else
+            mem[a] = 0;
+          ip++;
+          break;
+
+
+        case lessEqualCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          if(mem[b] <= mem[c])
+            mem[a] = 1;
+          else
+            mem[a] = 0;
+          ip++;
+          break;
+
+
+        case andCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          if(mem[b] != 0 && mem[c] != 0)
+            mem[a] = 1;
+          else
+            mem[a] = 0;
+          ip++;
+          break;
+
+        case orCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          if(mem[b] != 0 || 0 != mem[c])
+            mem[a] = 1;
+          else
+            mem[a] = 0;
+          ip++;
+          break;
+
+        case notCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          if(mem[b] == 0)
+            mem[a] = 1;
+          else
+            mem[a] = 0;
+          ip++;
+          break;
+
+
+        case oppCode:
+          // put opposite of contents of cell b in cell a...... how does this differ from not?
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          if()
+            mem[a] = ;
+          else
+            mem[a] = ;
+          ip++;
+          break;
+
+        case litCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          mem[a] = b;
+          ip++;
+          break;
+
+        case copyCode:
+          a = mem[++ip] + 2 + bp;
+          b = ++ip;
+          mem[a] = mem[b];
+          ip++;
+          break;
+
+        case getCode:
+          break;          
+
+
+
       }
 
        
