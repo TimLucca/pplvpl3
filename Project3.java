@@ -117,6 +117,12 @@ public class Project3
 
     int oldIp = 0;
 
+
+
+// Scanner created to grab input
+
+    Scanner readinput = new Scanner(System.in);
+
     do{
 /*
       System.out.println("--------------------------");
@@ -320,9 +326,58 @@ public class Project3
           break;
 
         case getCode:
-          break;          
+          // 
+          break;   
+          
+        case putCode:
+          // 
+          break;
 
+        case haltCode:
+          done = true;
+          break;
+        
+        case inputCode:
+          a = mem[++ip] + 2 + bp;
+          System.out.print("? ");
+          b = readinput.nextInt;
+          mem[a] = b;
+          ip++;
+          break;
 
+        case outputCode:
+          a = mem[++ip] + 2 + bp;
+          System.out.print(mem[a]);
+          ip++;
+          break;
+
+        case newlineCode:
+          System.out.print("/n");
+          ip++;
+          break;
+
+        case symbolCode:
+          a = mem[++ip] + 2 + bp;
+          if(mem[a] > 31 && mem[a] < 127)
+          {
+            // not sure how to print the int in mem[a] as an ascii character. maybe char it
+          }
+          break;
+
+        case newCode:
+          // some heap stuff
+          break;
+
+        case allocGlobalCode:
+          // 
+          break;
+        
+        case toGlobalCode:
+          break;
+
+        case fromGlobalCode:
+          break;
+          
 
       }
 
