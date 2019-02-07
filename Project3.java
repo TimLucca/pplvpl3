@@ -145,6 +145,10 @@ public class Project3
       switch(mem[ip]) 
       {
         case callCode: //not done
+          sp = 2 + numPassed + sp;
+          mem[sp] = ip+2;
+          mem[sp+1] = bp;
+          ip = mem[ip + 1];
           numPassed = 0;
           break;
 
@@ -301,13 +305,9 @@ public class Project3
 
 
         case oppCode:
-          // put opposite of contents of cell b in cell a...... how does this differ from not?
           a = mem[++ip] + 2 + bp;
           b = mem[++ip] + 2 + bp;
-          if()
-            mem[a] = ;
-          else
-            mem[a] = ;
+          mem[a] = 0 - mem[b];
           ip++;
           break;
 
@@ -326,11 +326,19 @@ public class Project3
           break;
 
         case getCode:
-          // 
+          b = mem[ip + 2] + 2 + bp;
+          c = mem[ip + 3] + 2 + bp;
+          a = mem[ip + 1] + 2 + bp;
+          mem[a] = mem[mem[b] + mem[c]];
+          ip += 4; 
           break;   
           
         case putCode:
-          // 
+          b = mem[ip + 2] + 2 + bp;
+          c = mem[ip + 3] + 2 + bp;
+          a = mem[ip + 1] + 2 + bp;
+          mem[mem[b] + mem[a]] = mem[c];
+          ip += 4; 
           break;
 
         case haltCode:
@@ -365,17 +373,27 @@ public class Project3
           break;
 
         case newCode:
-          // some heap stuff
+          b = mem[ip + 2];
+          hp = hp - b;
+          a = mem[ip + 1];
+          mem[a] = hp;
+          ip += 3;
           break;
 
         case allocGlobalCode:
-          // 
+          sp = mem[ip+1]; 
+          sp = sp + gp;
+          ip += 2;
           break;
         
         case toGlobalCode:
+          mem[gp + mem[ip+1]] = mem[mem[ip+ 2]];
+          ip += 3;
           break;
 
         case fromGlobalCode:
+          mem[mem[ip+1]] = mem[gp + mem[ip + 2]];
+          ip += 3; 
           break;
           
 
