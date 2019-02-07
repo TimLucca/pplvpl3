@@ -368,7 +368,7 @@ public class Project3
           a = mem[++ip] + 2 + bp;
           if(mem[a] > 31 && mem[a] < 127)
           {
-            // not sure how to print the int in mem[a] as an ascii character. maybe char it
+            System.out.print((char)mem[a]);
           }
           break;
 
