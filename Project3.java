@@ -124,7 +124,7 @@ public class Project3
     Scanner readinput = new Scanner(System.in);
 
     do{
-/*
+      /*
       System.out.println("--------------------------");
       System.out.println("Step of execution with IP = " + ip + " opcode: " +
           mem[ip] + 
@@ -136,7 +136,7 @@ public class Project3
       showMem( codeEnd+1, sp+3 );
       System.out.println("hit <enter> to go on" );
       keys.readLine();
-*/
+      */
 
 //System.out.println("ip=" + ip + " hp: " + hp + "--------------------------------------");
 //showMem(0,max-1);
@@ -145,9 +145,10 @@ public class Project3
       switch(mem[ip]) 
       {
         case callCode: //not done
-          sp = 2 + numPassed + sp;
           mem[sp] = ip+2;
           mem[sp+1] = bp;
+          bp = sp;
+          sp = 2 + numPassed + sp;
           ip = mem[ip + 1];
           numPassed = 0;
           break;
@@ -164,12 +165,11 @@ public class Project3
           break;
 
         case returnCode:
+          a = mem[++ip] + 2 + bp;
+          rv = mem[a];
           ip = mem[bp];
           sp = bp;
           bp = mem[bp+1];
-          a = mem[++ip] + 2 + bp;
-          mem[a] = rv;
-          ip++;
           break; 
 
         case getRetvalCode:
@@ -187,7 +187,7 @@ public class Project3
           if(mem[a] != 0)
             ip = mem[ip + 1];
           else
-            ip += 2;
+            ip += 3;
           break;
           
         case addCode:
@@ -195,6 +195,14 @@ public class Project3
           b = mem[++ip] + 2 + bp;
           c = mem[++ip] + 2 + bp;
           mem[a] = mem[b] + mem[c];
+          ip++;
+          break;
+
+        case subCode:
+          a = mem[++ip] + 2 + bp;
+          b = mem[++ip] + 2 + bp;
+          c = mem[++ip] + 2 + bp;
+          mem[a] = mem[b] - mem[c];
           ip++;
           break;
 
@@ -251,10 +259,12 @@ public class Project3
           a = mem[++ip] + 2 + bp;
           b = mem[++ip] + 2 + bp;
           c = mem[++ip] + 2 + bp;
-          if(mem[b] < mem[c])
+          if(mem[b] < mem[c]) {
             mem[a] = 1;
-          else
+          }
+          else {
             mem[a] = 0;
+          }
           ip++;
           break;
 
@@ -313,14 +323,14 @@ public class Project3
 
         case litCode:
           a = mem[++ip] + 2 + bp;
-          b = mem[++ip] + 2 + bp;
+          b = mem[++ip];
           mem[a] = b;
           ip++;
           break;
 
         case copyCode:
           a = mem[++ip] + 2 + bp;
-          b = ++ip;
+          b = mem[++ip] + 2 + bp;
           mem[a] = mem[b];
           ip++;
           break;
@@ -348,7 +358,7 @@ public class Project3
         case inputCode:
           a = mem[++ip] + 2 + bp;
           System.out.print("? ");
-          b = readinput.nextInt;
+          b = readinput.nextInt();
           mem[a] = b;
           ip++;
           break;
@@ -360,7 +370,7 @@ public class Project3
           break;
 
         case newlineCode:
-          System.out.print("/n");
+          System.out.print("\n");
           ip++;
           break;
 
@@ -370,12 +380,13 @@ public class Project3
           {
             System.out.print((char)mem[a]);
           }
+          ip++;
           break;
 
         case newCode:
-          b = mem[ip + 2];
-          hp = hp - b;
-          a = mem[ip + 1];
+          b = mem[ip + 2] + 2 + bp;
+          hp = hp - mem[b];
+          a = mem[ip + 1] + 2 + bp;
           mem[a] = hp;
           ip += 3;
           break;
