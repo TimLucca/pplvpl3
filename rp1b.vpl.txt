@@ -1,0 +1,55 @@
+4 10
+
+0 Stores input in cell 4
+27 4
+
+0 Stores numerical values 1, 2, 3
+22 1 1
+22 2 2
+22 3 3
+0 If yes, jump to loop. Else, halt
+8 1001 10
+26
+0 Loop
+1 1001
+
+0 Check if even, stores result in cell 5
+13 5 4 2
+
+0 If odd, jump to 1003
+8 1003 5
+
+0 Else, jump to 1004
+7 1004
+
+0 Return label
+1 1002
+
+0 Prints x
+28 4
+29
+
+0 Checks to see if x == 1
+15 10 1 4
+
+7 1001
+
+0 Odd label
+1 1003
+
+0 Multiply x by 3
+11 4 4 3
+0 Add 1 to x
+9 4 4 1
+
+0 return to loop
+7 1002
+
+0 Even Label
+1 1004
+
+0 Divides x by 2
+12 4 4 2
+
+0 return to loop
+7 1002
