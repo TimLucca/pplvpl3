@@ -124,7 +124,7 @@ public class Project3
     Scanner readinput = new Scanner(System.in);
 
     do{
-      /*
+      
       System.out.println("--------------------------");
       System.out.println("Step of execution with IP = " + ip + " opcode: " +
           mem[ip] + 
@@ -136,7 +136,7 @@ public class Project3
       showMem( codeEnd+1, sp+3 );
       System.out.println("hit <enter> to go on" );
       keys.readLine();
-      */
+      
 
 //System.out.println("ip=" + ip + " hp: " + hp + "--------------------------------------");
 //showMem(0,max-1);
@@ -392,18 +392,20 @@ public class Project3
           break;
 
         case allocGlobalCode:
-          sp = mem[ip+1]; 
-          sp = sp + gp;
+          a = mem[ip+1]; 
+          gp = bp;
+          bp += a;
+          sp += a;
           ip += 2;
           break;
         
         case toGlobalCode:
-          mem[gp + mem[ip+1]] = mem[mem[ip+ 2]];
+          mem[gp + mem[ip+1]] = mem[mem[ip+ 2] + bp + 2];
           ip += 3;
           break;
 
         case fromGlobalCode:
-          mem[mem[ip+1]] = mem[gp + mem[ip + 2]];
+          mem[mem[ip+1] + 2 + bp] = mem[gp + mem[ip + 2]];
           ip += 3; 
           break;
           
