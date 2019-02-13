@@ -124,7 +124,7 @@ public class Project3
     Scanner readinput = new Scanner(System.in);
 
     do{
-      
+      /*
       System.out.println("--------------------------");
       System.out.println("Step of execution with IP = " + ip + " opcode: " +
           mem[ip] + 
@@ -136,7 +136,7 @@ public class Project3
       showMem( codeEnd+1, sp+3 );
       System.out.println("hit <enter> to go on" );
       keys.readLine();
-      
+      */
 
 //System.out.println("ip=" + ip + " hp: " + hp + "--------------------------------------");
 //showMem(0,max-1);
